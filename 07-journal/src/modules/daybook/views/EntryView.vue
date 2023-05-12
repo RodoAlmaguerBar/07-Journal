@@ -22,7 +22,9 @@
   <div class="d-flex flex-column px-3 h-75">
     <textarea placeholder="¿Qué sucedió hoy?"></textarea>
   </div>
-  <FabJournal />
+  <FabJournal 
+  icon="fa-save"
+  />
   <img
     src="https://www.robertlandscapes.com/wp-content/uploads/2014/11/landscape-322100_1280.jpg"
     alt="entry-picture"
@@ -39,3 +41,24 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+
+textarea {
+    font-size: 20px;
+    border: none;
+    height: 100%;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+img {
+    width: 200px;
+    position: fixed;
+    bottom: 150px;
+    right: 20px;
+    box-shadow: 0px 5px 10px rgba($color: #000000, $alpha: 0.2);
+}
+
+</style>
