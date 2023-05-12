@@ -11,7 +11,10 @@
 
     <div class="entry-scrollarea">
       <EntryJournal 
-      v-for="item in entriesByTerm" :key="item" />
+      v-for="entry in entriesByTerm" 
+      :key="entry.id"
+      :entry="entry"
+      />
     </div>
   </div>
 </template>
