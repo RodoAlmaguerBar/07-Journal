@@ -22,9 +22,7 @@
   <div class="d-flex flex-column px-3 h-75">
     <textarea placeholder="¿Qué sucedió hoy?"></textarea>
   </div>
-  <FabJournal 
-  icon="fa-save"
-  />
+  <FabJournal icon="fa-save" />
   <img
     src="https://www.robertlandscapes.com/wp-content/uploads/2014/11/landscape-322100_1280.jpg"
     alt="entry-picture"
@@ -33,32 +31,55 @@
 </template>
 <script>
 import { defineAsyncComponent } from "vue";
+import { mapGetters } from 'vuex' 
 export default {
+  props: {
+        id: {
+            type: String,
+            required: true
+        }
+    },
   components: {
     FabJournal: defineAsyncComponent(() =>
       import("../components/FabJournal.vue")
     ),
   },
+  computed: {
+        ...mapGetters('journal', ['getEntryById']),
+     
+    },
+  methods: {
+        loadEntry() {
+          const entry = this.getEntryById( this.id )
+
+          console.log(entry)
+        }
+    },
+  created() {
+    /* console.log(this.$route.params.id); */
+  
+    this.loadEntry()
+
+  },
+
 };
 </script>
 <style lang="scss" scoped>
-
 textarea {
-    font-size: 20px;
-    border: none;
-    height: 100%;
+  font-size: 20px;
+  border: none;
+  height: 100%;
 
-    &:focus {
-        outline: none;
-    }
+  &:focus {
+    outline: none;
+  }
 }
 
 img {
-    width: 200px;
-    position: fixed;
-    bottom: 150px;
-    right: 20px;
-    box-shadow: 0px 5px 10px rgba($color: #000000, $alpha: 0.2);
+  width: 200px;
+  position: fixed;
+  bottom: 150px;
+  right: 20px;
+  box-shadow: 0px 5px 10px rgba($color: #000000, $alpha: 0.2);
 }
-
 </style>
