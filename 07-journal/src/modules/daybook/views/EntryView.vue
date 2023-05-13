@@ -1,9 +1,9 @@
 <template>
   <div class="entry-title d-flex justify-content-between p-2">
     <div>
-      <span class="text-success fs-3 fw-bold">11</span>
-      <span class="mx-1 fs-3">Mayo</span>
-      <span class="mx-2 fs-4 fw-light">2023, jueves</span>
+      <span class="text-success fs-3 fw-bold">{{ day }}</span>
+      <span class="mx-1 fs-3">{{ month }}</span>
+      <span class="mx-2 fs-4 fw-light">{{ yearDay }}</span>
     </div>
 
     <div>
@@ -20,7 +20,7 @@
   </div>
   <hr />
   <div class="d-flex flex-column px-3 h-75">
-    <textarea placeholder="¿Qué sucedió hoy?"></textarea>
+    <textarea v-model="entry.text" placeholder="¿Qué sucedió hoy?"></textarea>
   </div>
   <FabJournal icon="fa-save" />
   <img
@@ -31,37 +31,53 @@
 </template>
 <script>
 import { defineAsyncComponent } from "vue";
-import { mapGetters } from 'vuex' 
+import { mapGetters } from "vuex";
+import getDayMonthYear from "../helpers/getDayMonthYear";
 export default {
   props: {
-        id: {
-            type: String,
-            required: true
-        }
+    id: {
+      type: String,
+      required: true,
     },
+  },
   components: {
     FabJournal: defineAsyncComponent(() =>
       import("../components/FabJournal.vue")
     ),
   },
+  data() {
+    return {
+      entry: null,
+    };
+  },
   computed: {
-        ...mapGetters('journal', ['getEntryById']),
-     
+    ...mapGetters("journal", ["getEntryById"]),
+    day() {
+      const { day } = getDayMonthYear(this.entry.date);
+      return day;
     },
+    month() {
+      const { month } = getDayMonthYear(this.entry.date);
+      return month;
+    },
+    yearDay() {
+      const { yearDay } = getDayMonthYear(this.entry.date);
+      return yearDay;
+    },
+  },
   methods: {
-        loadEntry() {
-          const entry = this.getEntryById( this.id )
+    loadEntry() {
+      const entry = this.getEntryById(this.id);
+      if (!entry) return this.$router.push({ name: "no-entry" });
 
-          console.log(entry)
-        }
+      this.entry = entry;
     },
+  },
   created() {
     /* console.log(this.$route.params.id); */
-  
-    this.loadEntry()
 
+    this.loadEntry();
   },
-
 };
 </script>
 <style lang="scss" scoped>
