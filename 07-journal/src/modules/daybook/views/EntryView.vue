@@ -1,4 +1,5 @@
 <template>
+   <template v-if="entry">
   <div class="entry-title d-flex justify-content-between p-2">
     <div>
       <span class="text-success fs-3 fw-bold">{{ day }}</span>
@@ -22,12 +23,14 @@
   <div class="d-flex flex-column px-3 h-75">
     <textarea v-model="entry.text" placeholder="¿Qué sucedió hoy?"></textarea>
   </div>
-  <FabJournal icon="fa-save" />
   <img
     src="https://www.robertlandscapes.com/wp-content/uploads/2014/11/landscape-322100_1280.jpg"
     alt="entry-picture"
     class="img-thumbnail"
   />
+</template>
+  <FabJournal icon="fa-save" />
+  
 </template>
 <script>
 import { defineAsyncComponent } from "vue";
@@ -78,6 +81,11 @@ export default {
 
     this.loadEntry();
   },
+  watch: {
+        id() {
+            this.loadEntry()
+        }
+    }
 };
 </script>
 <style lang="scss" scoped>
