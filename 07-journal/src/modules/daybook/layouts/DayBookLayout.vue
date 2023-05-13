@@ -11,7 +11,7 @@
 </template>
 <script>
 import { defineAsyncComponent } from "vue";
-
+import { mapActions } from 'vuex'
 export default {
   components: {
     NavbarJournal: defineAsyncComponent(() =>
@@ -21,5 +21,11 @@ export default {
       import("../components/EntryListJournal.vue")
     ),
   },
+  methods: {
+        ...mapActions('journal', ['loadEntries'])
+    },
+    created() {
+        this.loadEntries()
+    }
 };
 </script>
