@@ -1,0 +1,22 @@
+[
+  {
+    "_id": "0869d13b-c191-4605-9f48-cc47918f9295",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://vue-demos-4306e-default-rtdb.firebaseio.com/entries",
+    "url": "https://vue-demos-4306e-default-rtdb.firebaseio.com/entries",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-05-13T20:40:27.544Z",
+    "modified": "2023-05-13T20:44:34.819Z",
+    "headers": [
+      {
+        "name": "User-Agent",
+        "value": "Thunder Client (https://www.thunderclient.com)",
+        "isDisabled": true
+      }
+    ],
+    "params": [],
+    "tests": []
+  }
+]
