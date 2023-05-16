@@ -1,36 +1,35 @@
 <template>
-   <template v-if="entry">
-  <div class="entry-title d-flex justify-content-between p-2">
-    <div>
-      <span class="text-success fs-3 fw-bold">{{ day }}</span>
-      <span class="mx-1 fs-3">{{ month }}</span>
-      <span class="mx-2 fs-4 fw-light">{{ yearDay }}</span>
-    </div>
+  <template v-if="entry">
+    <div class="entry-title d-flex justify-content-between p-2">
+      <div>
+        <span class="text-success fs-3 fw-bold">{{ day }}</span>
+        <span class="mx-1 fs-3">{{ month }}</span>
+        <span class="mx-2 fs-4 fw-light">{{ yearDay }}</span>
+      </div>
 
-    <div>
-      <button class="btn btn-danger mx-2">
-        Borrar
-        <i class="fa fa-trash-alt"></i>
-      </button>
+      <div>
+        <button class="btn btn-danger mx-2">
+          Borrar
+          <i class="fa fa-trash-alt"></i>
+        </button>
 
-      <button class="btn btn-primary">
-        Subir foto
-        <i class="fa fa-upload"></i>
-      </button>
+        <button class="btn btn-primary">
+          Subir foto
+          <i class="fa fa-upload"></i>
+        </button>
+      </div>
     </div>
-  </div>
-  <hr />
-  <div class="d-flex flex-column px-3 h-75">
-    <textarea v-model="entry.text" placeholder="¿Qué sucedió hoy?"></textarea>
-  </div>
-  <img
-    src="https://www.robertlandscapes.com/wp-content/uploads/2014/11/landscape-322100_1280.jpg"
-    alt="entry-picture"
-    class="img-thumbnail"
-  />
-</template>
-  <FabJournal icon="fa-save" />
-  
+    <hr />
+    <div class="d-flex flex-column px-3 h-75">
+      <textarea v-model="entry.text" placeholder="¿Qué sucedió hoy?"></textarea>
+    </div>
+    <img
+      src="https://www.robertlandscapes.com/wp-content/uploads/2014/11/landscape-322100_1280.jpg"
+      alt="entry-picture"
+      class="img-thumbnail"
+    />
+  </template>
+  <FabJournal @on:click="saveEntry" icon="fa-save" />
 </template>
 <script>
 import { defineAsyncComponent } from "vue";
@@ -75,6 +74,9 @@ export default {
 
       this.entry = entry;
     },
+    async saveEntry() {
+      console.log("hola mundo")
+    },
   },
   created() {
     /* console.log(this.$route.params.id); */
@@ -82,10 +84,10 @@ export default {
     this.loadEntry();
   },
   watch: {
-        id() {
-            this.loadEntry()
-        }
-    }
+    id() {
+      this.loadEntry();
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
